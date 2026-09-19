@@ -95,17 +95,7 @@ def join_quiz():
                 "message": "Quiz has already started. New participants cannot join."
             }), 403
 
-        # Check for existing participant with same phone
-        existing = get_participant_by_phone(phone)
-        if existing:
-            # Return existing participant (rejoin scenario)
-            return jsonify({
-                "success": True,
-                "message": "Welcome back! Rejoined successfully.",
-                "participant": serialize_participant(existing)
-            }), 200
-
-        # Create new participant
+        # Always create a new participant document (allow multiple participants with same phone)
         participant = create_participant(name=name, phone=phone)
         serialized = serialize_participant(participant)
 

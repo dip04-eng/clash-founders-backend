@@ -55,12 +55,16 @@ def init_db():
     """
     db = get_db()
 
-    # Create indexes for better query performance
-    # Participants: unique phone number index
+    # Participants: non-unique phone number index
+    try:
+        db.participants.drop_index("unique_phone")
+        logger.info("Dropped unique_phone index to allow same phone numbers")
+    except Exception:
+        pass
+
     db.participants.create_index(
         [("phone", ASCENDING)],
-        unique=True,
-        name="unique_phone"
+        name="phone_asc"
     )
 
     # Responses: compound index for quick lookups

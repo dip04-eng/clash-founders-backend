@@ -118,8 +118,8 @@ if __name__ == "__main__":
     try:
         logger.info("Initializing database...")
         init_db()
-        logger.info("Seeding questions...")
-        seed_questions()
+        # logger.info("Seeding questions...")
+        # seed_questions()
         logger.info("[OK] Database ready!")
     except Exception as e:
         logger.error(f"[ERROR] Database initialization failed: {e}")

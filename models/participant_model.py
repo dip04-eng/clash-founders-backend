@@ -30,11 +30,6 @@ def create_participant(name: str, phone: str, socket_id: str = "") -> dict:
     """
     db = get_db()
 
-    # Check for duplicate phone number
-    existing = db.participants.find_one({"phone": phone})
-    if existing:
-        raise ValueError(f"Phone number {phone} is already registered")
-
     participant = {
         "name": name,
         "phone": phone,
